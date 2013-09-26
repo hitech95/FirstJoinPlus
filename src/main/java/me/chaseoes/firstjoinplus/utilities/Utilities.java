@@ -78,6 +78,11 @@ public class Utilities {
                     if (itemValues.length > 2) {
                         i = new ItemStack(i.getType(), i.getAmount(), (short) Integer.parseInt(itemValues[2]));
                     }
+                	if(split.length > 3){
+                        ItemMeta im = i.getItemMeta();
+                        im.setDisplayName(replaceColors(itemValues[3]));
+                        i.setItemMeta(im);
+                    }
 
                     player.getInventory().addItem(i);
                 }
@@ -187,5 +192,12 @@ public class Utilities {
         }
         return "N/A";
     }
+    
+    	public static String replaceColors(String s){
+            if(s == null){
+                return null;
+            }
+            return s.replaceAll("(&([a-fk-or0-9]))", "\u00A7$2");
+        }
 
 }
